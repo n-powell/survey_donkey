@@ -2,6 +2,7 @@ require "sinatra"
 require "sinatra/reloader"
 require("sinatra/activerecord")
 require "./lib/surveys"
+require "./lib/questions"
 require "pry"
 
 also_reload "lib/**/*.rb"
@@ -27,14 +28,17 @@ post("/add_survey") do
 end
 
 # route to add question to db
-post("/add_question") do
-  question = params['add-question']
-  Questions.create(question: question)
+post("/questions") do
+  question = params['question']
+  survey_id = params['survey_id'].to_i()
+  @survey = Surveys.find(survey_id)
+  Questions.create(question: question, survey_id: survey_id)
   redirect('/questions')
 end
 
 # route to see question list
 get("/questions") do
+  @surveys = Surveys.all
   @questions = Questions.all
   erb(:questions)
 end

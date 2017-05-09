@@ -1,23 +1,25 @@
 <h1>Questions</h1>
 
-<div class="row">
-    <div class="col-md-6">
-      <form action="/add_question" method="post">
-        <label>Add an Question</label>
-        <input type="text" name="add-question">
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+<p> Add questions to any survey:</p>
 
-    <div class="col-md-6">
-      <%if @questions.any?%>
-      <ul>
-        <% @question.each do |question| %>
-        <li><%= question.question %></li>
-        <% end %>
-      </ul>
-      <%else%>
-      <em>No available questions</em>
-      <%end%>
-    </div>
-</div>
+<form action="/questions" method="post">
+  <label for="survey_id">Select a Survey</label>
+  <select id='survey_id' name='survey_id' type='text'>
+    <% @surveys.each() do |survey| %>
+      <option value="<%= survey.id()%>"> <%= survey.title() %> </option>
+    <% end %>
+  </select>
+
+  <label for="question">Enter a question:</label>
+  <input id="question" name="question" type="text">
+
+  <button type="submit">Add question</button>
+</form>
+
+
+
+<ul>
+  <% @questions.each do |question| %>
+  <li><a href="/question/<%= question.id %>"><%= question.question %></a></li>
+  <% end %>
+</ul>
