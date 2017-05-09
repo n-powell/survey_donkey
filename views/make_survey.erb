@@ -1,0 +1,22 @@
+<h1>Create a survey here</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <form action="/add_survey" method="post">
+      <label>Add a survey:</label>
+      <input type="text" name="add-survey">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <% if @surveys.any? %>
+    <ul>
+      <% @surveys.each do |survey| %>
+      <li><a href="/survey/<%= survey.id %>"><%= survey.title %></a></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <em>No available surveys</em>
+    <% end %>
+  </div>
+</div>
