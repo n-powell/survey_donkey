@@ -6,19 +6,27 @@ require "pry"
 
 also_reload "lib/**/*.rb"
 
+# route to index
 get "/" do
   erb :index
 end
 
-get("/make_survey") do
+# route to see surveys
+get("/surveys") do
   @surveys = Surveys.all
-  erb(:make_survey)
+  erb(:surveys)
 end
 
+# route to add a survey to db
 post("/add_survey") do
   survey = params['add-survey']
   Surveys.create(title: survey)
-  redirect('/make_survey')
+  redirect('/surveys')
   @surveys = Surveys.all
-  erb(:make_survey)
+  erb(:surveys)
+end
+
+get("/survey/:id") do
+  @survey = Surveys.find(params['id'].to_i)
+  erb(:survey)
 end

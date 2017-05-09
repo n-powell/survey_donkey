@@ -1,0 +1,12 @@
+<h1><%= @survey.title %></h1>
+
+<form action="/edit_survey/<%= @survey.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label>Edit survey title:</label>
+  <input type="text" name="edit-title">
+  <button type="submit">Submit</button>
+</form>
+<form action="/delete_survey/<%= @survey.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Remove survey</button>
+</form>
