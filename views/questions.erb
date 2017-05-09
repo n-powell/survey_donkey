@@ -1,0 +1,23 @@
+<h1>Questions</h1>
+
+<div class="row">
+    <div class="col-md-6">
+      <form action="/add_question" method="post">
+        <label>Add an Question</label>
+        <input type="text" name="add-question">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <%if @questions.any?%>
+      <ul>
+        <% @question.each do |question| %>
+        <li><%= question.question %></li>
+        <% end %>
+      </ul>
+      <%else%>
+      <em>No available questions</em>
+      <%end%>
+    </div>
+</div>

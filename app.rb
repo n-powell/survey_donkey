@@ -26,6 +26,19 @@ post("/add_survey") do
   erb(:surveys)
 end
 
+# route to add question to db
+post("/add_question") do
+  question = params['add-question']
+  Questions.create(question: question)
+  redirect('/questions')
+end
+
+# route to see question list
+get("/questions") do
+  @questions = Questions.all
+  erb(:questions)
+end
+
 
 # path to individual survey
 get("/survey/:id") do
